@@ -1,5 +1,5 @@
 """
-Author: ldqLDQ, Diaplo
+Author: Diaplo, ldqLDQ, H-1993
 功能： 与时间转换相关的操作
 """
 import time
@@ -45,3 +45,17 @@ def finished_status(stime,etime):
         return "已完成"
     else:
         return "进行中"
+    
+    
+def print_demo_trans():
+    """
+    Author: H-1993
+    功能：输出测试转换数据
+    """
+    s = "2020-11-15T14:30"
+    unix_s = unix_time(s)
+    print(unix_s)
+    # 1605421800
+    normal_s = normal_time(unix_s)
+    print(normal_s)
+    # 2020.11.15 14:30
