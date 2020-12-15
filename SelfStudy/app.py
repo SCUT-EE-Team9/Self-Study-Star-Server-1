@@ -16,7 +16,7 @@ class IndexView(Resource):
 
 class TestSearch(Resource):
     """
-    Author: ldqLDQ
+    Author: ldqLDQ, H-1993
     功能: 服务器返回测试数据
     """
 
