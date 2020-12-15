@@ -25,6 +25,7 @@ class MyPublished(Resource):
     Author: ldqLDQ
     功能: 获取一用户已发布的自习列表
     """
+
     def get(self):
         return 1
 
@@ -33,12 +34,13 @@ class MyPublished(Resource):
         parser.add_argument('username')
         args = parser.parse_args()
         username = pymysql.escape_string(args["username"])
-        db = pymysql.connect(host=Q_HOST, port=Q_PORT, user=Q_USER, passwd=Q_PASSWORD, db=Q_DB)
+        db = pymysql.connect(host = Q_HOST, port = Q_PORT, user = Q_USER, passwd = Q_PASSWORD, db = Q_DB)
         cursor = db.cursor()
         sql = "SELECT * FROM records where username = \'%s\'" % username
         cursor.execute(sql)
         lis = cursor.fetchall()
         dat = {}
+        # 获取数据库中的数据
         num = 0
         for i in lis:
             dat0 = {"tid": i[0], "username": i[1], "stime": normal_time(i[2]), "etime": normal_time(i[3]),
@@ -50,6 +52,7 @@ class MyPublished(Resource):
             # "sql": sql,
             "data": dat
         }
+        # 从数据库中筛选符合要求的数据进行输出
 
 
 class MyJoined(Resource):
@@ -57,6 +60,7 @@ class MyJoined(Resource):
     Author: ldqLDQ
     功能: 获取一用户当前加入的自习列表
     """
+
     def get(self):
         return 1
 
@@ -65,7 +69,7 @@ class MyJoined(Resource):
         parser.add_argument('username')
         args = parser.parse_args()
         username = pymysql.escape_string(args["username"])
-        db = pymysql.connect(host=Q_HOST, port=Q_PORT, user=Q_USER, passwd=Q_PASSWORD, db=Q_DB)
+        db = pymysql.connect(host = Q_HOST, port = Q_PORT, user = Q_USER, passwd = Q_PASSWORD, db = Q_DB)
         cursor = db.cursor()
         sql = "SELECT * FROM participants where pname = \'%s\'" % username
         cursor.execute(sql)

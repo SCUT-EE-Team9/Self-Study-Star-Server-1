@@ -14,6 +14,7 @@ class Publish(Resource):
     Author: ldqLDQ
     功能: 发布一条自习信息
     """
+
     def get(self):
         return {"error": "method not allowed"}
 
@@ -44,21 +45,21 @@ class Publish(Resource):
                 "result": "failed",
                 "message": "请完整填写信息！"
             }
-        # 返回错误信息
+        # 当输出时间出错时返回错误信息
         # str1 = username+stime+etime+location+remarks
-        db = pymysql.connect(host=Q_HOST, port=Q_PORT, user=Q_USER, passwd=Q_PASSWORD, db=Q_DB)
+        db = pymysql.connect(host = Q_HOST, port = Q_PORT, user = Q_USER, passwd = Q_PASSWORD, db = Q_DB)
         cursor = db.cursor()
         sql = "SELECT * FROM config"
         cursor.execute(sql)
         idnum = cursor.fetchone()[0]
         # 查询已发布的自习数量
-        sql = "UPDATE config SET idnum=idnum+1"
+        sql = "UPDATE config SET idnum = idnum+1"
         cursor.execute(sql)
         idnum += 1
         # 发布自习数+1
         sql = "INSERT INTO records (tid, username, stime, etime, location, remarks)" \
               " VALUES " \
-              "(%d,\"%s\",%d,%d,\"%s\",\"%s\")"% (idnum, username, unix_t_s, unix_t_e, location, remarks)
+              "(%d,\"%s\",%d,%d,\"%s\",\"%s\")" % (idnum, username, unix_t_s, unix_t_e, location, remarks)
         cursor.execute(sql)
         # 插入数据
         return {
@@ -75,6 +76,7 @@ class Join(Resource):
     Author: ldqLDQ
     功能: 加入一个自习
     """
+
     def get(self):
         return {"error": "method not allowed"}
 
@@ -109,6 +111,7 @@ class Join(Resource):
               " VALUES " \
               "(%d,\"%s\",\"%s\",%d)" % (pid, pname, pmessage, tid)
         cursor.execute(sql)
+        # 更新数据库数据
         return {
             "result": "ok",
             # "sql": sql,
@@ -116,3 +119,4 @@ class Join(Resource):
             # "message": str1
             "message": "加入自习成功！"
         }
+        # 数据输入成功后返回加入自习成功信息

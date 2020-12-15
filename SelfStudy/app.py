@@ -12,10 +12,6 @@ class IndexView(Resource):
     def get(self):
         return {"hello": "world123"}
 
-    #
-    """
-
-    """
 
 
 class TestSearch(Resource):
@@ -38,8 +34,8 @@ class TestSearch(Resource):
                       "location": "210", "remarks": "hswt", "joined": "0", "finished": "0"}
                 }
 
-
-''' return {
+''' 
+return {
 	"result": "ok",
 	"data": {
 		"0": {
@@ -103,16 +99,17 @@ class TestSearch(Resource):
 			"finished": "已完成"
 		}
 	}
-}'''
+}
+'''
 
-api.add_resource(UserAPI, '/users/<int:uid>', endpoint='user')
-api.add_resource(IndexView, '/', endpoint='index')
-api.add_resource(Publish, '/publish', endpoint='Publish')
-api.add_resource(Search, '/search', endpoint='Search')
-api.add_resource(Join, '/join', endpoint='Join')
-api.add_resource(Detail, '/detail/<int:tid>', endpoint='Detail')
-api.add_resource(MyPublished, '/my/published', endpoint='MyPublished')
-api.add_resource(MyJoined, '/my/joined', endpoint='MyJoined')
+api.add_resource(UserAPI, '/users/<int:uid>', endpoint = 'user')
+api.add_resource(IndexView, '/', endpoint = 'index')
+api.add_resource(Publish, '/publish', endpoint = 'Publish')
+api.add_resource(Search, '/search', endpoint = 'Search')
+api.add_resource(Join, '/join', endpoint = 'Join')
+api.add_resource(Detail, '/detail/<int:tid>', endpoint = 'Detail')
+api.add_resource(MyPublished, '/my/published', endpoint = 'MyPublished')
+api.add_resource(MyJoined, '/my/joined', endpoint = 'MyJoined')
 
 
 # api.add_resource(TestSearch, '/test/search', endpoint='testsearch')
@@ -124,7 +121,6 @@ def after_request(resp):
     resp.headers['Access-Control-Allow-Headers'] = '*'
     # 允许跨域访问
     return resp
-
 
 app.after_request(after_request)
 

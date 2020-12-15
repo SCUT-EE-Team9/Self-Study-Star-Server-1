@@ -15,13 +15,15 @@ class Search(Resource):
     功能: 搜索符合条件的已发布自习信息
     """
 
-    """def display(self):
+    """
+    def display(self):
         db = pymysql.connect(host=Q_HOST, port=Q_PORT, user=Q_USER, passwd=Q_PASSWORD, db=Q_DB)
         cursor = db.cursor()
         sql = "SELECT * FROM records"
         cursor.execute(sql)
         results = cursor.fetchall()
-        return results"""
+        return results
+    """
 
     def get(self):
         return {"error": "method not allowed"}
@@ -39,8 +41,8 @@ class Search(Resource):
         # 转换时间格式
         db = pymysql.connect(host=Q_HOST, port=Q_PORT, user=Q_USER, passwd=Q_PASSWORD, db=Q_DB)
         cursor = db.cursor()
-        sql = "select * from records where location like '%%%s%%' and(( stime<=%d and etime>=%d)or %d=-1)" % (
-            location, Unix_Time, Unix_Time, Unix_Time)
+        sql = "select * from records where location like '%%%s%%' and(( stime <= %d and etime >= %d)or %d=-1)" \
+              % (location, Unix_Time, Unix_Time, Unix_Time)
         cursor.execute(sql)
         # 筛选符合条件的数据
         lis = cursor.fetchall()
@@ -56,6 +58,7 @@ class Search(Resource):
             # "sql": sql,
             "data": dat
         }
+        # 从数据库中筛选符合要求的数据进行输出
 
 
 class Detail(Resource):
@@ -63,6 +66,7 @@ class Detail(Resource):
     Author: ldqLDQ
     功能: 获取当前自习详情
     """
+
     def get(self, tid):
         db = pymysql.connect(host=Q_HOST, port=Q_PORT, user=Q_USER, passwd=Q_PASSWORD, db=Q_DB)
         cursor = db.cursor()
